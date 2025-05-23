@@ -1,0 +1,421 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    LPAREN
+    RPAREN
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> stmt_list
+Rule 2     stmt_list -> stmt stmt_list
+Rule 3     stmt_list -> stmt
+Rule 4     stmt -> declaration
+Rule 5     stmt -> assignment
+Rule 6     stmt -> print_stmt
+Rule 7     declaration -> ID EQUALS expr
+Rule 8     assignment -> ID EQUALS expr
+Rule 9     print_stmt -> PRINT ID
+Rule 10    expr -> expr PLUS expr
+Rule 11    expr -> expr MINUS expr
+Rule 12    expr -> expr TIMES expr
+Rule 13    expr -> expr DIVIDE expr
+Rule 14    expr -> NUMBER
+Rule 15    expr -> ID
+
+Terminals, with rules where they appear
+
+DIVIDE               : 13
+EQUALS               : 7 8
+ID                   : 7 8 9 15
+LPAREN               : 
+MINUS                : 11
+NUMBER               : 14
+PLUS                 : 10
+PRINT                : 9
+RPAREN               : 
+TIMES                : 12
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment           : 5
+declaration          : 4
+expr                 : 7 8 10 10 11 11 12 12 13 13
+print_stmt           : 6
+program              : 0
+stmt                 : 2 3
+stmt_list            : 1 2
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . stmt_list
+    (2) stmt_list -> . stmt stmt_list
+    (3) stmt_list -> . stmt
+    (4) stmt -> . declaration
+    (5) stmt -> . assignment
+    (6) stmt -> . print_stmt
+    (7) declaration -> . ID EQUALS expr
+    (8) assignment -> . ID EQUALS expr
+    (9) print_stmt -> . PRINT ID
+
+    ID              shift and go to state 7
+    PRINT           shift and go to state 8
+
+    program                        shift and go to state 1
+    stmt_list                      shift and go to state 2
+    stmt                           shift and go to state 3
+    declaration                    shift and go to state 4
+    assignment                     shift and go to state 5
+    print_stmt                     shift and go to state 6
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> stmt_list .
+
+    $end            reduce using rule 1 (program -> stmt_list .)
+
+
+state 3
+
+    (2) stmt_list -> stmt . stmt_list
+    (3) stmt_list -> stmt .
+    (2) stmt_list -> . stmt stmt_list
+    (3) stmt_list -> . stmt
+    (4) stmt -> . declaration
+    (5) stmt -> . assignment
+    (6) stmt -> . print_stmt
+    (7) declaration -> . ID EQUALS expr
+    (8) assignment -> . ID EQUALS expr
+    (9) print_stmt -> . PRINT ID
+
+    $end            reduce using rule 3 (stmt_list -> stmt .)
+    ID              shift and go to state 7
+    PRINT           shift and go to state 8
+
+    stmt                           shift and go to state 3
+    stmt_list                      shift and go to state 9
+    declaration                    shift and go to state 4
+    assignment                     shift and go to state 5
+    print_stmt                     shift and go to state 6
+
+state 4
+
+    (4) stmt -> declaration .
+
+    ID              reduce using rule 4 (stmt -> declaration .)
+    PRINT           reduce using rule 4 (stmt -> declaration .)
+    $end            reduce using rule 4 (stmt -> declaration .)
+
+
+state 5
+
+    (5) stmt -> assignment .
+
+    ID              reduce using rule 5 (stmt -> assignment .)
+    PRINT           reduce using rule 5 (stmt -> assignment .)
+    $end            reduce using rule 5 (stmt -> assignment .)
+
+
+state 6
+
+    (6) stmt -> print_stmt .
+
+    ID              reduce using rule 6 (stmt -> print_stmt .)
+    PRINT           reduce using rule 6 (stmt -> print_stmt .)
+    $end            reduce using rule 6 (stmt -> print_stmt .)
+
+
+state 7
+
+    (7) declaration -> ID . EQUALS expr
+    (8) assignment -> ID . EQUALS expr
+
+    EQUALS          shift and go to state 10
+
+
+state 8
+
+    (9) print_stmt -> PRINT . ID
+
+    ID              shift and go to state 11
+
+
+state 9
+
+    (2) stmt_list -> stmt stmt_list .
+
+    $end            reduce using rule 2 (stmt_list -> stmt stmt_list .)
+
+
+state 10
+
+    (7) declaration -> ID EQUALS . expr
+    (8) assignment -> ID EQUALS . expr
+    (10) expr -> . expr PLUS expr
+    (11) expr -> . expr MINUS expr
+    (12) expr -> . expr TIMES expr
+    (13) expr -> . expr DIVIDE expr
+    (14) expr -> . NUMBER
+    (15) expr -> . ID
+
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 12
+
+    expr                           shift and go to state 13
+
+state 11
+
+    (9) print_stmt -> PRINT ID .
+
+    ID              reduce using rule 9 (print_stmt -> PRINT ID .)
+    PRINT           reduce using rule 9 (print_stmt -> PRINT ID .)
+    $end            reduce using rule 9 (print_stmt -> PRINT ID .)
+
+
+state 12
+
+    (15) expr -> ID .
+
+    PLUS            reduce using rule 15 (expr -> ID .)
+    MINUS           reduce using rule 15 (expr -> ID .)
+    TIMES           reduce using rule 15 (expr -> ID .)
+    DIVIDE          reduce using rule 15 (expr -> ID .)
+    ID              reduce using rule 15 (expr -> ID .)
+    PRINT           reduce using rule 15 (expr -> ID .)
+    $end            reduce using rule 15 (expr -> ID .)
+
+
+state 13
+
+    (7) declaration -> ID EQUALS expr .
+    (8) assignment -> ID EQUALS expr .
+    (10) expr -> expr . PLUS expr
+    (11) expr -> expr . MINUS expr
+    (12) expr -> expr . TIMES expr
+    (13) expr -> expr . DIVIDE expr
+
+  ! reduce/reduce conflict for ID resolved using rule 7 (declaration -> ID EQUALS expr .)
+  ! reduce/reduce conflict for PRINT resolved using rule 7 (declaration -> ID EQUALS expr .)
+  ! reduce/reduce conflict for $end resolved using rule 7 (declaration -> ID EQUALS expr .)
+    ID              reduce using rule 7 (declaration -> ID EQUALS expr .)
+    PRINT           reduce using rule 7 (declaration -> ID EQUALS expr .)
+    $end            reduce using rule 7 (declaration -> ID EQUALS expr .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+
+  ! ID              [ reduce using rule 8 (assignment -> ID EQUALS expr .) ]
+  ! PRINT           [ reduce using rule 8 (assignment -> ID EQUALS expr .) ]
+  ! $end            [ reduce using rule 8 (assignment -> ID EQUALS expr .) ]
+
+
+state 14
+
+    (14) expr -> NUMBER .
+
+    PLUS            reduce using rule 14 (expr -> NUMBER .)
+    MINUS           reduce using rule 14 (expr -> NUMBER .)
+    TIMES           reduce using rule 14 (expr -> NUMBER .)
+    DIVIDE          reduce using rule 14 (expr -> NUMBER .)
+    ID              reduce using rule 14 (expr -> NUMBER .)
+    PRINT           reduce using rule 14 (expr -> NUMBER .)
+    $end            reduce using rule 14 (expr -> NUMBER .)
+
+
+state 15
+
+    (10) expr -> expr PLUS . expr
+    (10) expr -> . expr PLUS expr
+    (11) expr -> . expr MINUS expr
+    (12) expr -> . expr TIMES expr
+    (13) expr -> . expr DIVIDE expr
+    (14) expr -> . NUMBER
+    (15) expr -> . ID
+
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 12
+
+    expr                           shift and go to state 19
+
+state 16
+
+    (11) expr -> expr MINUS . expr
+    (10) expr -> . expr PLUS expr
+    (11) expr -> . expr MINUS expr
+    (12) expr -> . expr TIMES expr
+    (13) expr -> . expr DIVIDE expr
+    (14) expr -> . NUMBER
+    (15) expr -> . ID
+
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 12
+
+    expr                           shift and go to state 20
+
+state 17
+
+    (12) expr -> expr TIMES . expr
+    (10) expr -> . expr PLUS expr
+    (11) expr -> . expr MINUS expr
+    (12) expr -> . expr TIMES expr
+    (13) expr -> . expr DIVIDE expr
+    (14) expr -> . NUMBER
+    (15) expr -> . ID
+
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 12
+
+    expr                           shift and go to state 21
+
+state 18
+
+    (13) expr -> expr DIVIDE . expr
+    (10) expr -> . expr PLUS expr
+    (11) expr -> . expr MINUS expr
+    (12) expr -> . expr TIMES expr
+    (13) expr -> . expr DIVIDE expr
+    (14) expr -> . NUMBER
+    (15) expr -> . ID
+
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 12
+
+    expr                           shift and go to state 22
+
+state 19
+
+    (10) expr -> expr PLUS expr .
+    (10) expr -> expr . PLUS expr
+    (11) expr -> expr . MINUS expr
+    (12) expr -> expr . TIMES expr
+    (13) expr -> expr . DIVIDE expr
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    ID              reduce using rule 10 (expr -> expr PLUS expr .)
+    PRINT           reduce using rule 10 (expr -> expr PLUS expr .)
+    $end            reduce using rule 10 (expr -> expr PLUS expr .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+
+  ! PLUS            [ reduce using rule 10 (expr -> expr PLUS expr .) ]
+  ! MINUS           [ reduce using rule 10 (expr -> expr PLUS expr .) ]
+  ! TIMES           [ reduce using rule 10 (expr -> expr PLUS expr .) ]
+  ! DIVIDE          [ reduce using rule 10 (expr -> expr PLUS expr .) ]
+
+
+state 20
+
+    (11) expr -> expr MINUS expr .
+    (10) expr -> expr . PLUS expr
+    (11) expr -> expr . MINUS expr
+    (12) expr -> expr . TIMES expr
+    (13) expr -> expr . DIVIDE expr
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    ID              reduce using rule 11 (expr -> expr MINUS expr .)
+    PRINT           reduce using rule 11 (expr -> expr MINUS expr .)
+    $end            reduce using rule 11 (expr -> expr MINUS expr .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+
+  ! PLUS            [ reduce using rule 11 (expr -> expr MINUS expr .) ]
+  ! MINUS           [ reduce using rule 11 (expr -> expr MINUS expr .) ]
+  ! TIMES           [ reduce using rule 11 (expr -> expr MINUS expr .) ]
+  ! DIVIDE          [ reduce using rule 11 (expr -> expr MINUS expr .) ]
+
+
+state 21
+
+    (12) expr -> expr TIMES expr .
+    (10) expr -> expr . PLUS expr
+    (11) expr -> expr . MINUS expr
+    (12) expr -> expr . TIMES expr
+    (13) expr -> expr . DIVIDE expr
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    ID              reduce using rule 12 (expr -> expr TIMES expr .)
+    PRINT           reduce using rule 12 (expr -> expr TIMES expr .)
+    $end            reduce using rule 12 (expr -> expr TIMES expr .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+
+  ! PLUS            [ reduce using rule 12 (expr -> expr TIMES expr .) ]
+  ! MINUS           [ reduce using rule 12 (expr -> expr TIMES expr .) ]
+  ! TIMES           [ reduce using rule 12 (expr -> expr TIMES expr .) ]
+  ! DIVIDE          [ reduce using rule 12 (expr -> expr TIMES expr .) ]
+
+
+state 22
+
+    (13) expr -> expr DIVIDE expr .
+    (10) expr -> expr . PLUS expr
+    (11) expr -> expr . MINUS expr
+    (12) expr -> expr . TIMES expr
+    (13) expr -> expr . DIVIDE expr
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    ID              reduce using rule 13 (expr -> expr DIVIDE expr .)
+    PRINT           reduce using rule 13 (expr -> expr DIVIDE expr .)
+    $end            reduce using rule 13 (expr -> expr DIVIDE expr .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+
+  ! PLUS            [ reduce using rule 13 (expr -> expr DIVIDE expr .) ]
+  ! MINUS           [ reduce using rule 13 (expr -> expr DIVIDE expr .) ]
+  ! TIMES           [ reduce using rule 13 (expr -> expr DIVIDE expr .) ]
+  ! DIVIDE          [ reduce using rule 13 (expr -> expr DIVIDE expr .) ]
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 19 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 19 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 19 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 19 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 20 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 20 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 20 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 20 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 21 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 21 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 21 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 21 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 22 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 22 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 22 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 22 resolved as shift
+WARNING: reduce/reduce conflict in state 13 resolved using rule (declaration -> ID EQUALS expr)
+WARNING: rejected rule (assignment -> ID EQUALS expr) in state 13
+WARNING: Rule (assignment -> ID EQUALS expr) is never reduced
